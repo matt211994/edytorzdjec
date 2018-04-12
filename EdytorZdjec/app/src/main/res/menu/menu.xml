@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/grey"
+    android:title="Gray"
+    ></item>
+
+    <item
+        android:id="@+id/obroc"
+        android:title="Obróć"
+        ></item>
+    <item
+        android:id="@+id/HSV"
+        android:title="HSV"
+        ></item>
+    <item
+        android:id="@+id/Binary"
+        android:title="Binary"
+        ></item>
+</menu>
