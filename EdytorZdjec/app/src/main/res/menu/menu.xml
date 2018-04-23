@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <item
-    android:id="@+id/grey"
+    android:id="@+id/gray"
     android:title="Gray"
     ></item>
 
     <item
-        android:id="@+id/obroc"
+        android:id="@+id/rotate"
         android:title="Obróć"
         ></item>
     <item
