@@ -16,7 +16,9 @@ import android.widget.Toast;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class Conversions extends AppCompatActivity {
@@ -24,9 +26,8 @@ public class Conversions extends AppCompatActivity {
     Bitmap temp;
     ImageView image;
     long addres;
-    Mat mat;
-    boolean ifGray;
-    boolean ifBinary;
+    Mat mat,clear;
+    int counter=0;
     public String TAG = "Picture";
 
 
@@ -37,6 +38,7 @@ public class Conversions extends AppCompatActivity {
         addres = getIntent().getLongExtra("mat", 0);
         Mat temp = new Mat(addres);
         mat = temp.clone();
+        clear = mat.clone();
         image = (ImageView) findViewById(R.id.imageView2);
         showImg();
     }
@@ -66,11 +68,49 @@ public class Conversions extends AppCompatActivity {
 
     public void toRotate()
     {
-        Core.rotate(mat, mat, Core.ROTATE_90_CLOCKWISE);
-        temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(mat, temp);
-        Drawable d = new BitmapDrawable(temp);
-        image.setBackground(d);
+        Mat M,temp2;
+        if(counter==1) {
+            mat=clear.clone();
+            temp2 = mat.clone();
+            M = Imgproc.getRotationMatrix2D(new Point(mat.cols() / 2, mat.rows() / 2), 270, 1);
+            Imgproc.warpAffine(mat, temp2, M, mat.size());
+            mat = temp2.clone();
+            temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(mat, temp);
+            Drawable d = new BitmapDrawable(temp);
+            image.setBackground(d);
+        }
+        if (counter==2)
+        {
+            mat=clear.clone();
+            Core.rotate(mat,mat,Core.ROTATE_180);
+            temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(mat, temp);
+            Drawable d = new BitmapDrawable(temp);
+            image.setBackground(d);
+        }
+        if (counter==3)
+        {
+            mat=clear.clone();
+            temp2 = mat.clone();
+            M = Imgproc.getRotationMatrix2D(new Point(mat.cols() / 2, mat.rows() / 2), 90, 1);
+            Imgproc.warpAffine(mat, temp2, M, mat.size());
+            temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+            mat = temp2.clone();
+            Utils.matToBitmap(mat, temp);
+            Drawable d = new BitmapDrawable(temp);
+            image.setBackground(d);
+        }
+        if (counter==4)
+        {
+            mat=clear.clone();
+            temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(mat, temp);
+            Drawable d = new BitmapDrawable(temp);
+            image.setBackground(d);
+            counter=0;
+        }
+
     }
 
     public void toHSV()
@@ -97,36 +137,23 @@ public class Conversions extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.gray) {
-            if (ifGray == true || ifBinary == true) {
-                Toast.makeText(getApplicationContext(), "NIEDOZWOLONA KONWERSJA!", Toast.LENGTH_LONG).show();
-            } else {
-                ifGray = true;
+                mat = clear.clone();
                 toGray();
-            }
             return true;
         }
-
         if (id == R.id.rotate) {
+            counter++;
             toRotate();
             return true;
         }
 
         if (id == R.id.HSV) {
-            if (ifGray == true||ifBinary == true) {
-                Toast.makeText(getApplicationContext(), "NIEDOZWOLONA KONWERSJA!", Toast.LENGTH_LONG).show();
-            } else {
+                mat=clear.clone();
                 toHSV();
-            }
         }
-
         if (id == R.id.Binary) {
-            if(ifGray==true)
-            {
-                Toast.makeText(getApplicationContext(), "NIEDOZWOLONA KONWERSJA!", Toast.LENGTH_LONG).show();
-            }else {
+                mat = clear.clone();
                 toBinary();
-                ifBinary = true;
-            }
         }
             return true;
         }
