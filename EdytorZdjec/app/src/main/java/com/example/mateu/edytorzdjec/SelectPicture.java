@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.JavaCamera2View;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
@@ -84,6 +86,12 @@ public class SelectPicture extends AppCompatActivity {
         intent.putExtra("mat",addres);
         startActivity(intent);
 
+    }
+
+    public void StartCameraView(View view)
+    {
+        Intent intent=new Intent(this,Camera.class);
+        startActivity(intent);
     }
 
 }
