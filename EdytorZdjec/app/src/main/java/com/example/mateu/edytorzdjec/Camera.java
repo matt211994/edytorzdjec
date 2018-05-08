@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.FocusFinder;
 import android.view.KeyEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -14,6 +16,7 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 public class Camera extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
@@ -47,7 +50,6 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-
         javaCameraView = (JavaCameraView) findViewById(R.id.java_camera_view);
         javaCameraView.setVisibility(SurfaceView.VISIBLE);
         javaCameraView.setCvCameraViewListener(this);
@@ -81,9 +83,11 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
 
     }
 
+
+
     @Override
     public void onCameraViewStarted(int width, int height) {
-        mRgba = new Mat(height, width, CvType.CV_8UC4);
+        mRgba = new Mat(width, height, CvType.CV_8UC4);
     }
 
     @Override
@@ -105,6 +109,7 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
                 if (action == KeyEvent.ACTION_UP) {
+                    javaCameraView.focusSearch(View.FOCUS_UP);
                     capturemRgba = mRgba.clone();
                     addres = capturemRgba.getNativeObjAddr();
                     Intent intent = new Intent(this, Conversions.class);
