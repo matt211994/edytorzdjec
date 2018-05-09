@@ -28,7 +28,10 @@ public class Conversions extends AppCompatActivity {
     long addres;
     Mat mat,clear;
     int counter=0;
+    String filename = "zdjecie.jpg";
     public String TAG = "Picture";
+
+    SavePicture SavePicture = new SavePicture();
 
 
     @Override
@@ -132,6 +135,11 @@ public class Conversions extends AppCompatActivity {
         image.setBackground(d);
     }
 
+    public void SavePicture()
+    {
+        SavePicture.storeImage(temp,filename);
+        Toast.makeText(this,"Zapisano zdjęcie",Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,7 +154,6 @@ public class Conversions extends AppCompatActivity {
             toRotate();
             return true;
         }
-
         if (id == R.id.HSV) {
                 mat=clear.clone();
                 toHSV();
@@ -154,6 +161,10 @@ public class Conversions extends AppCompatActivity {
         if (id == R.id.Binary) {
                 mat = clear.clone();
                 toBinary();
+        }
+        if (id == R.id.Save)
+        {
+            SavePicture();
         }
             return true;
         }

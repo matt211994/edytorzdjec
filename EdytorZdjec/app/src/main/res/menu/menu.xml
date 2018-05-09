@@ -19,4 +19,7 @@
         android:id="@+id/Binary"
         android:title="Binary"
         ></item>
+    <item
+        android:id="@+id/Save"
+        android:title="Zapisz"></item>
 </menu>
