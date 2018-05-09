@@ -4,13 +4,16 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.opencv.android.Utils;
@@ -135,6 +138,16 @@ public class Conversions extends AppCompatActivity {
         image.setBackground(d);
     }
 
+    public void toBlur()
+    {
+        org.opencv.core.Size s = new Size(50,50);
+        Imgproc.blur(mat,mat,s);
+        temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(mat, temp);
+        Drawable d = new BitmapDrawable(temp);
+        image.setBackground(d);
+    }
+
     public void SavePicture()
     {
         SavePicture.storeImage(temp,filename);
@@ -165,6 +178,10 @@ public class Conversions extends AppCompatActivity {
         if (id == R.id.Save)
         {
             SavePicture();
+        }
+        if(id == R.id.Blur)
+        {
+            toBlur();
         }
             return true;
         }

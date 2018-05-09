@@ -20,6 +20,12 @@
         android:title="Binary"
         ></item>
     <item
+        android:id="@+id/Blur"
+        android:title="Rozmycie"
+        ></item>
+    <item
         android:id="@+id/Save"
-        android:title="Zapisz"></item>
+        android:title="Zapisz"
+        ></item>
+
 </menu>
