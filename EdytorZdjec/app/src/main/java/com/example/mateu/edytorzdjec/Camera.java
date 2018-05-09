@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.FocusFinder;
 import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -16,7 +15,6 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
 
 public class Camera extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
@@ -82,7 +80,6 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
         }
 
     }
-
 
 
     @Override

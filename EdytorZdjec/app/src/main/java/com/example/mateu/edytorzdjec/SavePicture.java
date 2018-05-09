@@ -3,17 +3,12 @@ package com.example.mateu.edytorzdjec;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.opencv.imgcodecs.Imgcodecs;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import static android.widget.Toast.*;
 
 public class SavePicture {
 

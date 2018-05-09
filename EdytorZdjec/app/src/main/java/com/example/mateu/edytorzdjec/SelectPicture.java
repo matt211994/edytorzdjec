@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.JavaCamera2View;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
@@ -21,18 +19,17 @@ import org.opencv.core.Mat;
 public class SelectPicture extends AppCompatActivity {
 
 
-    public Bitmap selected;
-    long addres;
-    Mat mat;
     private static final int SELECTED_PICTURE = 1;
     static String TAG = "EdytorZdjęć";
-
 
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
     }
 
+    public Bitmap selected;
+    long addres;
+    Mat mat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +66,7 @@ public class SelectPicture extends AppCompatActivity {
                     selected = selected.copy(Bitmap.Config.ARGB_8888, true);
                     mat = new Mat(selected.getHeight(), selected.getWidth(), CvType.CV_8UC1);
                     Utils.bitmapToMat(selected, mat);
-                    addres=mat.getNativeObjAddr();
+                    addres = mat.getNativeObjAddr();
                     MatToAnotherClass();
 
                 }
@@ -80,17 +77,15 @@ public class SelectPicture extends AppCompatActivity {
     }
 
 
-    public void MatToAnotherClass()
-    {
-        Intent intent=new Intent(this,Conversions.class);
-        intent.putExtra("mat",addres);
+    public void MatToAnotherClass() {
+        Intent intent = new Intent(this, Conversions.class);
+        intent.putExtra("mat", addres);
         startActivity(intent);
 
     }
 
-    public void StartCameraView(View view)
-    {
-        Intent intent=new Intent(this,Camera.class);
+    public void StartCameraView(View view) {
+        Intent intent = new Intent(this, Camera.class);
         startActivity(intent);
     }
 
