@@ -1,6 +1,7 @@
 package com.example.mateu.edytorzdjec;
 
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -12,8 +13,9 @@ import java.io.IOException;
 
 public class SavePicture {
 
+
     protected boolean storeImage(Bitmap imageData, String filename) {
-        String iconsStoragePath = Environment.getExternalStorageDirectory() + "/myAppDir/myImages/";
+        String iconsStoragePath = Environment.getExternalStorageDirectory() + "/myAppDir/myImages";
         File sdIconStorageDir = new File(iconsStoragePath);
 
         //create storage directories, if they don't exist
@@ -26,7 +28,6 @@ public class SavePicture {
 
             //choose another format if PNG doesn't suit you
             imageData.compress(Bitmap.CompressFormat.PNG, 100, bos);
-
             bos.flush();
             bos.close();
 
@@ -41,3 +42,5 @@ public class SavePicture {
         return true;
     }
 }
+
+

@@ -8,7 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.opencv.android.Utils;
@@ -18,6 +22,8 @@ import org.opencv.core.Point;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+
+
 public class Conversions extends AppCompatActivity {
 
     public String TAG = "Picture";
@@ -26,7 +32,7 @@ public class Conversions extends AppCompatActivity {
     long addres;
     Mat mat, clear;
     int counter = 0;
-    String filename = "zdjecie.jpg";
+    String filename="zjdecie.jpg";
     SavePicture SavePicture = new SavePicture();
 
 
@@ -133,9 +139,14 @@ public class Conversions extends AppCompatActivity {
         image.setBackground(d);
     }
 
+
     public void SavePicture() {
-        SavePicture.storeImage(temp, filename);
-        Toast.makeText(this, "Zapisano zdjęcie", Toast.LENGTH_LONG).show();
+        new Thread( new Runnable() {
+            public void run(){
+                SavePicture.storeImage(temp, filename);
+                return;
+            }
+        }).start();
     }
 
 
@@ -162,6 +173,7 @@ public class Conversions extends AppCompatActivity {
         }
         if (id == R.id.Save) {
             SavePicture();
+            Toast.makeText(getApplicationContext(), "Zapisano zdjęcie", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.Blur) {
             toBlur();
