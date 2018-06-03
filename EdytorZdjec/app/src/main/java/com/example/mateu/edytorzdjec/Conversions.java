@@ -176,6 +176,7 @@ public class Conversions extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Zapisano zdjęcie", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.Blur) {
+            mat = clear.clone();
             toBlur();
         }
         return true;
