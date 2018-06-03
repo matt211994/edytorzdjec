@@ -25,6 +25,7 @@ public class SavingPicture extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bmp=null;
         setContentView(R.layout.activity_saving_picture);
         edit = findViewById(R.id.editText);
         buttonOK = findViewById(R.id.button_ok);

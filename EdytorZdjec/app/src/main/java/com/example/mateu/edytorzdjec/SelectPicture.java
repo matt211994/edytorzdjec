@@ -36,6 +36,7 @@ public class SelectPicture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if (OpenCVLoader.initDebug()) {
             Log.i(TAG, "OpenCv loaded");
         }
@@ -45,6 +46,7 @@ public class SelectPicture extends AppCompatActivity {
 
 
     public void btnClick(View view) {
+        mat=null;
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, SELECTED_PICTURE);
     }
@@ -66,6 +68,7 @@ public class SelectPicture extends AppCompatActivity {
                     selected = selected.copy(Bitmap.Config.ARGB_8888, true);
                     mat = new Mat(selected.getHeight(), selected.getWidth(), CvType.CV_8UC1);
                     Utils.bitmapToMat(selected, mat);
+                    addres=0;
                     addres = mat.getNativeObjAddr();
                     MatToAnotherClass();
 

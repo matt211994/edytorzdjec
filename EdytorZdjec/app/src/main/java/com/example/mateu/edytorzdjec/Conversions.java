@@ -3,6 +3,7 @@ package com.example.mateu.edytorzdjec;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class Conversions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zdjecie);
+        addres  = 0;
         addres = getIntent().getLongExtra("mat", 0);
         Mat temp = new Mat(addres);
         mat = temp.clone();
@@ -66,7 +68,7 @@ public class Conversions extends AppCompatActivity {
 
 
     public void showImg() {
-        temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_4444);
+        temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
         image.setBackground(d);
