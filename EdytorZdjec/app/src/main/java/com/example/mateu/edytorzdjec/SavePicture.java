@@ -14,7 +14,7 @@ import java.io.IOException;
 public class SavePicture {
 
 
-    protected boolean storeImage(Bitmap imageData, String filename) {
+    protected static boolean storeImage(Bitmap imageData, String filename) {
         String iconsStoragePath = Environment.getExternalStorageDirectory() + "/EdytorZdjec";
         File sdIconStorageDir = new File(iconsStoragePath);
 

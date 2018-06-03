@@ -1,5 +1,6 @@
 package com.example.mateu.edytorzdjec;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,13 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+
 public class SavingPicture extends AppCompatActivity {
 
     SavePicture SavePicture = new SavePicture();
     EditText edit;
     Button buttonOK, buttonCancel;
     public String filename;
-    Bitmap bmp;
+    Bitmap bmp=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +29,14 @@ public class SavingPicture extends AppCompatActivity {
         edit = findViewById(R.id.editText);
         buttonOK = findViewById(R.id.button_ok);
         buttonCancel = findViewById(R.id.button_cancel);
-
-        byte[] byteArray = getIntent().getByteArrayExtra("image");
-        bmp = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+        String Bitmapname = getIntent().getStringExtra("image");
+        try {
+            FileInputStream is = this.openFileInput(Bitmapname);
+            bmp = BitmapFactory.decodeStream(is);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
 
         buttonOK.setOnClickListener(new View.OnClickListener() {
@@ -64,4 +72,15 @@ public class SavingPicture extends AppCompatActivity {
         }).start();
     }
 
+    public static Bitmap scaleBitmap(Bitmap photo, int newHeight, Context context)
+    {
+        final float densityMultiplier = context.getResources().getDisplayMetrics().density;
+
+        int h= (int) (newHeight*densityMultiplier);
+        int w= (int) (h * photo.getWidth()/((double) photo.getHeight()));
+
+        photo=Bitmap.createScaledBitmap(photo, w, h, true);
+
+        return photo;
+    }
 }

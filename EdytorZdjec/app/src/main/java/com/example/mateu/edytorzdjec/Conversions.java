@@ -1,5 +1,6 @@
 package com.example.mateu.edytorzdjec;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,8 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class Conversions extends AppCompatActivity {
@@ -35,6 +39,9 @@ public class Conversions extends AppCompatActivity {
     Mat mat, clear;
     int counter = 0;
     String filename="zjdecie.jpg";
+    ProgressBar progres;
+
+    SavePicture SavePicture = new SavePicture();
 
 
 
@@ -48,6 +55,7 @@ public class Conversions extends AppCompatActivity {
         clear = mat.clone();
         image = (ImageView) findViewById(R.id.imageView2);
         showImg();
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,7 +66,7 @@ public class Conversions extends AppCompatActivity {
 
 
     public void showImg() {
-        temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+        temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_4444);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
         image.setBackground(d);
@@ -143,17 +151,23 @@ public class Conversions extends AppCompatActivity {
 
 
     public void SavePicture() {
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Conversions.this,SavingPicture.class);
-                ByteArrayOutputStream bStream = new
-                        ByteArrayOutputStream();
-                temp.compress(Bitmap.CompressFormat.PNG,100,bStream);
-                byte[] byteArray = bStream.toByteArray();
-                intent.putExtra("image",byteArray);
-                startActivity(intent);
-                finish();
+               try{
+                   String filename = "bitmap.png";
+                   FileOutputStream stream = Conversions.this.openFileOutput(filename, Context.MODE_PRIVATE);
+                   temp.compress(Bitmap.CompressFormat.PNG,100,stream);
+                   stream.close();
+                   temp.recycle();
+                   Intent intent = new Intent(Conversions.this,SavingPicture.class);
+                   intent.putExtra("image",filename);
+                   startActivity(intent);
+               }catch (Exception e)
+               {
+                   e.printStackTrace();
+               }
             }
         }).start();
 

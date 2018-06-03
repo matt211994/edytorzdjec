@@ -78,9 +78,14 @@ public class SelectPicture extends AppCompatActivity {
 
 
     public void MatToAnotherClass() {
-        Intent intent = new Intent(this, Conversions.class);
-        intent.putExtra("mat", addres);
-        startActivity(intent);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SelectPicture.this, Conversions.class);
+                intent.putExtra("mat", addres);
+                startActivity(intent);
+            }
+        }).start();
 
     }
 
