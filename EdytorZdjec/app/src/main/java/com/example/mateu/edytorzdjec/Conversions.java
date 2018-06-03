@@ -1,5 +1,6 @@
 package com.example.mateu.edytorzdjec;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.ByteArrayOutputStream;
 
 
 public class Conversions extends AppCompatActivity {
@@ -33,7 +35,7 @@ public class Conversions extends AppCompatActivity {
     Mat mat, clear;
     int counter = 0;
     String filename="zjdecie.jpg";
-    SavePicture SavePicture = new SavePicture();
+
 
 
     @Override
@@ -141,12 +143,20 @@ public class Conversions extends AppCompatActivity {
 
 
     public void SavePicture() {
-        new Thread( new Runnable() {
-            public void run(){
-                SavePicture.storeImage(temp, filename);
-                return;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(Conversions.this,SavingPicture.class);
+                ByteArrayOutputStream bStream = new
+                        ByteArrayOutputStream();
+                temp.compress(Bitmap.CompressFormat.PNG,100,bStream);
+                byte[] byteArray = bStream.toByteArray();
+                intent.putExtra("image",byteArray);
+                startActivity(intent);
+                finish();
             }
         }).start();
+
     }
 
 
@@ -173,7 +183,6 @@ public class Conversions extends AppCompatActivity {
         }
         if (id == R.id.Save) {
             SavePicture();
-            Toast.makeText(getApplicationContext(), "Zapisano zdjęcie", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.Blur) {
             mat = clear.clone();

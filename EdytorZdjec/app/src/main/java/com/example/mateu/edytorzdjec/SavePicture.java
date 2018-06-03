@@ -15,13 +15,13 @@ public class SavePicture {
 
 
     protected boolean storeImage(Bitmap imageData, String filename) {
-        String iconsStoragePath = Environment.getExternalStorageDirectory() + "/myAppDir/myImages";
+        String iconsStoragePath = Environment.getExternalStorageDirectory() + "/EdytorZdjec";
         File sdIconStorageDir = new File(iconsStoragePath);
 
         //create storage directories, if they don't exist
         sdIconStorageDir.mkdirs();
         try {
-            String filePath = sdIconStorageDir.toString() + filename;
+            String filePath = "/storage/emulated/0/EdytorZdjec/" + filename;
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
 
             BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
