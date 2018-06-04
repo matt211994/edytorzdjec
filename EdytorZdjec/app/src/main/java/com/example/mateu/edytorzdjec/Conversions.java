@@ -71,7 +71,7 @@ public class Conversions extends AppCompatActivity {
         temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
-        image.setBackground(d);
+        image.setImageBitmap(temp);
     }
 
     public void toGray() {
@@ -79,7 +79,7 @@ public class Conversions extends AppCompatActivity {
         temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
-        image.setBackground(d);
+        image.setImageBitmap(temp);
     }
 
     public void toRotate() {
@@ -93,7 +93,7 @@ public class Conversions extends AppCompatActivity {
             temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
             Utils.matToBitmap(mat, temp);
             Drawable d = new BitmapDrawable(temp);
-            image.setBackground(d);
+            image.setImageBitmap(temp);
         }
         if (counter == 2) {
             mat = clear.clone();
@@ -101,7 +101,7 @@ public class Conversions extends AppCompatActivity {
             temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
             Utils.matToBitmap(mat, temp);
             Drawable d = new BitmapDrawable(temp);
-            image.setBackground(d);
+            image.setImageBitmap(temp);
         }
         if (counter == 3) {
             mat = clear.clone();
@@ -112,14 +112,14 @@ public class Conversions extends AppCompatActivity {
             mat = temp2.clone();
             Utils.matToBitmap(mat, temp);
             Drawable d = new BitmapDrawable(temp);
-            image.setBackground(d);
+            image.setImageBitmap(temp);
         }
         if (counter == 4) {
             mat = clear.clone();
             temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
             Utils.matToBitmap(mat, temp);
             Drawable d = new BitmapDrawable(temp);
-            image.setBackground(d);
+            image.setImageBitmap(temp);
             counter = 0;
         }
 
@@ -130,7 +130,7 @@ public class Conversions extends AppCompatActivity {
         temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
-        image.setBackground(d);
+        image.setImageBitmap(temp);
     }
 
     public void toBinary() {
@@ -139,7 +139,7 @@ public class Conversions extends AppCompatActivity {
         temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
-        image.setBackground(d);
+        image.setImageBitmap(temp);
     }
 
     public void toBlur() {
@@ -148,7 +148,7 @@ public class Conversions extends AppCompatActivity {
         temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
         Drawable d = new BitmapDrawable(temp);
-        image.setBackground(d);
+        image.setImageBitmap(temp);
     }
 
 
