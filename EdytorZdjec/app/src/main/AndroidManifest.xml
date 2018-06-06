@@ -14,26 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectPicture">
+        <activity android:name=".SelectPicture"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Conversions" />
+        <activity android:name=".Conversions"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Camera"
             android:label="@string/title_activity_camera"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SavingPicture"></activity>
+        <activity android:name=".SavingPicture"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
