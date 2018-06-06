@@ -207,5 +207,11 @@ public class Conversions extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    public void onBackPressed()
+    {
+        this.startActivity(new Intent(Conversions.this,SelectPicture.class));
+    }
 }
 

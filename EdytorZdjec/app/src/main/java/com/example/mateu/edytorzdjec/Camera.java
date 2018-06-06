@@ -123,4 +123,11 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
                 return super.dispatchKeyEvent(event);
         }
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        this.startActivity(new Intent(Camera.this,SelectPicture.class));
+    }
+
 }

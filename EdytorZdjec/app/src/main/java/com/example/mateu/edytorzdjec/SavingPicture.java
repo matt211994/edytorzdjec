@@ -84,4 +84,10 @@ public class SavingPicture extends AppCompatActivity {
 
         return photo;
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        this.startActivity(new Intent(SavingPicture.this,SelectPicture.class));
+    }
 }
