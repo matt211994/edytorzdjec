@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="346dp"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />

@@ -12,14 +12,14 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
 
 
-
+        //powitalny wątek, to całe liczenie czasu, lepiej tego nie opisuj :D ale ładnie wygląda
         Thread welcomeThread = new Thread() {
 
             @Override
             public void run() {
                 try {
                     super.run();
-                    sleep(3000);
+                    sleep(1000);
                 } catch (Exception e) {
 
                 } finally {

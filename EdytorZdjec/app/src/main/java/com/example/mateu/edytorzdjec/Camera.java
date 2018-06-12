@@ -22,11 +22,12 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
     static {
         System.loadLibrary("native-lib");
     }
-
     JavaCameraView javaCameraView;
     Mat mRgba, capturemRgba;
     long addres;
     BaseLoaderCallback mLoaderCallBack = new BaseLoaderCallback(this) {
+
+
         @Override
         public void onManagerConnected(int status) {
             switch (status) {
@@ -54,6 +55,7 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
 
     }
 
+    //podczas pausy aktywności wyłączana jest kamera , oszczędność zasobów telefonu
     @Override
     protected void onPause() {
         super.onPause();
@@ -61,6 +63,7 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
             javaCameraView.disableView();
     }
 
+    //podobna sytuacja co wyżej tylko przy kończeniu aktywności
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -68,6 +71,7 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
             javaCameraView.disableView();
     }
 
+    //podczas wznowienia, próba wczytania ponownie biblioteki opencv
     @Override
     protected void onResume() {
         super.onResume();
@@ -81,23 +85,26 @@ public class Camera extends AppCompatActivity implements CameraBridgeViewBase.Cv
 
     }
 
-
+    // podczas uruchomienia kamery tworzy się obraz Mat
     @Override
     public void onCameraViewStarted(int width, int height) {
         mRgba = new Mat(width, height, CvType.CV_8UC4);
     }
 
+    //podczas zatrzymania obrazu, zatracana jest zmienna openCV Mat
     @Override
     public void onCameraViewStopped() {
         mRgba.release();
     }
 
+    //przekazywanie obrazu na wyświetlacz
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
         return mRgba;
     }
 
+    //rejestrowanie zdjęcia po naciśnięciu przycisku podgłaszania na telefonie
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         int action = event.getAction();

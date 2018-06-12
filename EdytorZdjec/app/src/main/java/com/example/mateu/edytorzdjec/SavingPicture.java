@@ -22,6 +22,8 @@ public class SavingPicture extends AppCompatActivity {
     public String filename;
     Bitmap bmp=null;
 
+    //TO JEST CAŁA AKTYWNOŚĆ W KTÓREJ PODAJEMY NAZWĘ PLIKU I PLIK SIĘ ZAPISUJE
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class SavingPicture extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        //WYWOŁYWANIE FUNKCJI SAVEPICTURE PO NACIŚNIĘCIU PRZYCISKU OK
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,7 @@ public class SavingPicture extends AppCompatActivity {
 
 
 
-
+    //OSOBNY WĄTEK DO ZAPISYWANIA PLIKU
     public void SavePicture(final Bitmap bitmapToSave, final String filenameToSave) {
         new Thread( new Runnable() {
             public void run(){
@@ -73,17 +75,7 @@ public class SavingPicture extends AppCompatActivity {
         }).start();
     }
 
-    public static Bitmap scaleBitmap(Bitmap photo, int newHeight, Context context)
-    {
-        final float densityMultiplier = context.getResources().getDisplayMetrics().density;
 
-        int h= (int) (newHeight*densityMultiplier);
-        int w= (int) (h * photo.getWidth()/((double) photo.getHeight()));
-
-        photo=Bitmap.createScaledBitmap(photo, w, h, true);
-
-        return photo;
-    }
 
     @Override
     public void onBackPressed()

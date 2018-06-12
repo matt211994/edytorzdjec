@@ -41,7 +41,6 @@ public class Conversions extends AppCompatActivity {
     int counter = 0;
     String filename="zjdecie.jpg";
     ProgressBar progres;
-
     SavePicture SavePicture = new SavePicture();
 
 
@@ -66,7 +65,7 @@ public class Conversions extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
+   // tutaj nazwu funkcji raczej mówią wszystko
     public void showImg() {
         temp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, temp);
@@ -175,7 +174,7 @@ public class Conversions extends AppCompatActivity {
 
     }
 
-
+    // wywoływanie funkcji po wyborze poszczególnych opcji rozwijanego menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
